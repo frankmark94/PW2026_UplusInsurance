@@ -78,7 +78,7 @@ export default {
         try {
           elem = JSON.parse(e.data);
         } catch {
-          elem = {};
+            // Ignore JSON parse errors; elem stays as the default object.
         }
         if (
           elem.channelName === 'PWMashup' &&

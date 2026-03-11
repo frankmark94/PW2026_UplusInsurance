@@ -21,12 +21,12 @@ export default {
   },
   mounted() {
     const mytag = this.$refs.mycomp;
-    let objClass = '';
-    let actionParam = '';
-    let action = '';
+    let objClass;
+    let actionParam;
+    let action;
     let caseTitle = '';
-    let heading = '';
-    let extraParam = '';
+    let heading;
+    let extraParam;
     if (this.quickLinkId !== -1) {
       action = this.settings.quicklinks[this.quickLinkId].action;
       mytag.url = this.settings.quicklinks[this.quickLinkId].url;

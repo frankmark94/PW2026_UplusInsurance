@@ -1,12 +1,9 @@
 /* eslint no-console: 0 */
 const setAuth = function setAuth(username, password) {
-  let auth = '';
-  if (username && password) {
-    auth = btoa(`${username}:${password}`);
-  } else {
+  if (!username || !password) {
     throw new Error('Set authentication failed.');
   }
-  return auth;
+  return btoa(`${username}:${password}`);
 };
 
 const validateOTP = async function validateOTP(
