@@ -33,7 +33,7 @@
 <script>
 import { mainconfig, setCookie } from '../../global';
 import { sendClickStreamEvent } from '../../CDHIntegration';
-import generateJWTKey from '../../JWTToken';
+import { generateJWTToken } from '../../lazyJWT';
 
 export default {
   data() {
@@ -48,7 +48,7 @@ export default {
         this.isActive = false;
       }
     },
-    logOut() {
+    async logOut() {
       sendClickStreamEvent(mainconfig, 'Logout', 'Home', window.loadPage);
       sendClickStreamEvent(mainconfig, 'PageView', 'Home', window.loadPage);
       window.loadPage = new Date();
@@ -125,7 +125,7 @@ export default {
           UserName: window.PegaCSWSS.UserName,
           UserID: window.PegaCSWSS.UserID,
         };
-        const jwttoken = generateJWTKey(
+        const jwttoken = await generateJWTToken(
           { iss: window.PegaCSWSS.DMMSessionID },
           mainconfig.settings.pega_chat.DMMSecret,
         );

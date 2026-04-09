@@ -6,11 +6,13 @@
 </template>
 
 <script>
+import { defineAsyncComponent } from 'vue';
 import { mainconfig } from '@/global';
-import { sendClickStreamEvent } from '@/CDHIntegration';
-import DefaultPage from './DefaultPage.vue';
-import OfferPage from './OfferPage.vue';
-import SettingsPage from './SettingsPage.vue';
+import { sendClickStreamEventLazy } from '@/lazyCDH';
+
+const DefaultPage = defineAsyncComponent(() => import('./DefaultPage.vue'));
+const OfferPage = defineAsyncComponent(() => import('./OfferPage.vue'));
+const SettingsPage = defineAsyncComponent(() => import('./SettingsPage.vue'));
 
 export default {
   data() {
@@ -53,7 +55,7 @@ export default {
         page_path: mainconfig.currentPage,
       });
     }
-    sendClickStreamEvent(mainconfig, 'Access');
+    sendClickStreamEventLazy(mainconfig, 'Access');
     window.loadPage = new Date();
   },
   components: {

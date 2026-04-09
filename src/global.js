@@ -1,28 +1,15 @@
 /* global sendProactiveNotificationReq */
 /* global PegaUnifiedChatWidget */
-import generateJWTKey from './JWTToken';
+import { generateJWTToken } from './lazyJWT';
 import { createI18n } from 'vue-i18n';
 import { reactive } from 'vue';
-import { sendClickStreamEvent } from './CDHIntegration';
+import { buildI18nResources } from './i18nBootstrap';
+import { sendClickStreamEventLazy } from './lazyCDH';
 
-const messages = {};
-const datetimeFormats = {};
-const numberFormats = {};
+const { messages, datetimeFormats, numberFormats, defaultLocale } =
+  buildI18nResources(window.settings, window, console);
 
-let isDefaultLocaleLoaded = false;
-for (const i in window.settings.i18n.languages) {
-  const lang = window.settings.i18n.languages[i];
-  messages[lang] = {
-    message: eval(`window.lang${lang.toUpperCase()}`),
-  };
-  datetimeFormats[lang] = eval(`window.dateFormat${lang.toUpperCase()}`);
-  numberFormats[lang] = eval(`window.numberFormat${lang.toUpperCase()}`);
-  /* Check if the default locale is available in the list of languages - if not, then select the first one */
-  if (lang === window.settings.i18n.defaultlocale) isDefaultLocaleLoaded = true;
-}
-if (!isDefaultLocaleLoaded) {
-  [window.settings.i18n.defaultlocale] = window.settings.i18n.languages;
-}
+window.settings.i18n.defaultlocale = defaultLocale;
 
 export const i18n = createI18n({
   locale: window.settings.i18n.defaultlocale,
@@ -526,7 +513,7 @@ if (typeof window.settings === 'undefined') {
         UserName: window.PegaCSWSS.UserName,
         UserID: window.PegaCSWSS.UserID,
       };
-      const jwtToken = generateJWTKey(
+      const jwtToken = await generateJWTToken(
         { iss: sessionId },
         mainconfigTmp.settings.pega_chat.DMMSecret,
       );
@@ -574,7 +561,7 @@ if (typeof window.settings === 'undefined') {
           `guest-${Date.now()}`;
 
         // JWT for create must use iss = widgetId
-        const jwtForCreate = generateJWTKey(
+        const jwtForCreate = await generateJWTToken(
           { iss: widgetId },
           mainconfigTmp.settings.pega_chat.DMMSecret,
         );
@@ -637,7 +624,12 @@ if (typeof window.settings === 'undefined') {
       if (el) {
         el.style.zIndex = 1000;
       }
-      sendClickStreamEvent(mainconfigTmp, 'PageView', 'Chat', window.loadPage);
+      sendClickStreamEventLazy(
+        mainconfigTmp,
+        'PageView',
+        'Chat',
+        window.loadPage,
+      );
       if (
         mainconfigTmp.settings.pega_chat.DMMSecret !== '' &&
         mainconfigTmp.userId !== -1 &&
@@ -700,22 +692,22 @@ if (typeof window.settings === 'undefined') {
           if (event.SendAcknowledgement) {
             if (event.AcknowledgeOn == 'After5Seconds') {
               setTimeout(function () {
-                sendEventAcknowledgement(widgetEvent.name);
+                void sendEventAcknowledgement(widgetEvent.name);
                 el.classList.remove('pulse');
               }, 5000);
             } else if (event.AcknowledgeOn == 'After30Seconds') {
               setTimeout(function () {
-                sendEventAcknowledgement(widgetEvent.name);
+                void sendEventAcknowledgement(widgetEvent.name);
                 el.classList.remove('pulse');
               }, 30000);
             } else if (event.AcknowledgeOn == 'LoginSuccess') {
               if (mainconfigTmp.isAuthenticated) {
-                sendEventAcknowledgement(widgetEvent.name);
+                void sendEventAcknowledgement(widgetEvent.name);
                 el.classList.remove('pulse');
               } else {
                 // Listen for the confirmLogin event to fire
                 document.addEventListener('confirmLogin', function () {
-                  sendEventAcknowledgement(widgetEvent.name);
+                  void sendEventAcknowledgement(widgetEvent.name);
                   el.classList.remove('pulse');
                 });
               }
@@ -757,7 +749,7 @@ if (typeof window.settings === 'undefined') {
      * Makes POST request to DM service to send an event acknowledgement
      * @param {string} eventName the event name to acknowledge
      */
-    const sendEventAcknowledgement = function (eventName) {
+    const sendEventAcknowledgement = async function (eventName) {
       let sessionId = localStorage.getItem('sessionId');
       console.log(
         `Sending event acknowledgement for event: ${eventName} sessionID:${sessionId}`,
@@ -773,7 +765,7 @@ if (typeof window.settings === 'undefined') {
           name: eventName,
         };
 
-        const jwttoken = generateJWTKey(
+        const jwttoken = await generateJWTToken(
           { iss: sessionId },
           mainconfigTmp.settings.pega_chat.DMMSecret,
         );
@@ -895,7 +887,7 @@ window.addEventListener('popstate', () => {
   }
 });
 
-export const updatePegaChat = function updatePegaChat(u) {
+export const updatePegaChat = async function updatePegaChat(u) {
   const chatEl = document.getElementById('pegaChatWidget');
   if (chatEl) {
     chatEl.style.zIndex = 1000;
@@ -959,7 +951,7 @@ export const updatePegaChat = function updatePegaChat(u) {
       UserName: window.PegaCSWSS.UserName,
       UserID: window.PegaCSWSS.UserID,
     };
-    const jwttoken = generateJWTKey(
+    const jwttoken = await generateJWTToken(
       { iss: window.PegaCSWSS.DMMSessionID },
       mainconfig.settings.pega_chat.DMMSecret,
     );

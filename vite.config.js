@@ -35,6 +35,27 @@ export default defineConfig({
         travel: resolve(__dirname, "travel/index.html"),
         energy: resolve(__dirname, "energy/index.html")
       },
+      output: {
+        manualChunks(id) {
+          if (id.includes('node_modules')) {
+            if (
+              id.includes('/vue/') ||
+              id.includes('vue-i18n') ||
+              id.includes('vue-gtag')
+            ) {
+              return 'vendor-vue';
+            }
+            if (id.includes('crypto-js')) {
+              return 'vendor-crypto';
+            }
+            return 'vendor';
+          }
+          if (id.includes('/src/CDHIntegration.js')) {
+            return 'cdh-integration';
+          }
+          return undefined;
+        },
+      },
     },
   },
   resolve: {
