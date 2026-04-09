@@ -1,26 +1,28 @@
 import { readFileSync, readdirSync, renameSync, writeFileSync } from 'node:fs';
 import { replaceInFileSync } from 'replace-in-file';
 
+const industryPathPattern = [
+  'auto',
+  'commercial_bank',
+  'comms',
+  'comms_business',
+  'gov',
+  'health_care',
+  'health_payer',
+  'health_pharma',
+  'health_provider',
+  'insurance',
+  'manufacturing',
+  'retail_bank',
+  'wealth',
+  'travel',
+  'energy',
+].join('|');
+
 const optionsFile1 = {
   files: './docs/*/index.html',
-  from: [
-    /\/auto\//g,
-    /\/commercial_bank\//g,
-    /\/comms\//g,
-    /\/comms_business\//g,
-    /\/gov\//g,
-    /\/health_care\//g,
-    /\/health_payer\//g,
-    /\/health_pharma\//g,
-    /\/health_provider\//g,
-    /\/insurance\//g,
-    /\/manufacturing\//g,
-    /\/retail_bank\//g,
-    /\/wealth\//g,
-    /\/travel\//g,
-    /\/energy\//g,
-  ],
-  to: './',
+  from: new RegExp(`((?:href|src)=['"])/(?:${industryPathPattern})/`, 'g'),
+  to: '$1./',
 };
 
 const optionsFile2 = {
