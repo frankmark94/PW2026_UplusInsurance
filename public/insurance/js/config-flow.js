@@ -38,11 +38,6 @@ window.app = {
   ],
   offers: [
     {
-      img: 'offer1.jpg',
-      title: 'offer1_title',
-      message: 'offer1_msg',
-    },
-    {
       img: 'offer2.jpg',
       title: 'offer2_title',
       message: 'offer2_msg',

@@ -10,6 +10,22 @@
         errorloading
       "
     >
+      <section v-if="app.industry === 'insurance'" class="ai-assistant-promo">
+        <div class="ai-assistant-icon-wrap">
+          <svg class="ai-assistant-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="56" height="56" fill="none">
+            <circle cx="32" cy="32" r="30" fill="var(--brandColor)" opacity="0.1"/>
+            <path d="M44 36h-1.5l-2.5-7c-.4-1.1-1.4-1.9-2.6-1.9H26.6c-1.2 0-2.2.8-2.6 1.9l-2.5 7H20c-1.1 0-2 .9-2 2v6c0 .6.4 1 1 1h2c.6 0 1-.4 1-1v-1h20v1c0 .6.4 1 1 1h2c.6 0 1-.4 1-1v-6c0-1.1-.9-2-2-2z" fill="var(--brandColor)" opacity="0.8"/>
+            <circle cx="24" cy="39" r="2" fill="#fff"/>
+            <circle cx="40" cy="39" r="2" fill="#fff"/>
+            <rect x="28" y="37" width="8" height="3" rx="1" fill="#fff" opacity="0.7"/>
+          </svg>
+        </div>
+        <h3 class="ai-assistant-title">{{ $t('message.ai_assistant_title') }}</h3>
+        <p class="ai-assistant-msg">{{ $t('message.ai_assistant_msg') }}</p>
+        <a href="./new-quote.html" class="ai-assistant-cta">
+          {{ $t('message.ai_assistant_cta') }}
+        </a>
+      </section>
       <section
         class="offer-card-col"
         v-for="item in app.offers"
