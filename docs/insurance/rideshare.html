@@ -534,40 +534,29 @@
          The widget itself controls its floating button/chat UI positioning. -->
   </div>
 
+  <!-- Proactive Chat presenter panel (backtick-toggle) — shared module -->
+  <script src="./js/proactive-chat-panel.js"></script>
+
   <script>
     /* ---- Final-CTA button click ---- */
     document.getElementById('open-assistant-btn').addEventListener('click', function () {
-      // TODO: Open the Pega Agentic Messaging widget with rideshare context.
-      //   PegaMessaging.open({ intent: 'rideshare-coverage-inquiry' });
+      // TODO: Open the Pega Web Messaging widget with rideshare context
+      // once it's wired into this standalone page.
       console.log('[U+ Insurance] Chat with Virtual Assistant clicked — rideshare page');
     });
 
-    /* ---- Proactive scroll-triggered widget open (stub) ----
-       When the user scrolls past ~60% of the page, we will trigger a proactive
-       Virtual Assistant message offering to help. Actual widget triggering
-       will be wired into the Pega Agentic Messaging API later. */
-    (function () {
-      var hasTriggered = false;
-      var scrollThreshold = 0.6; // 60% of the page
-
-      function onScroll() {
-        if (hasTriggered) return;
-        var scrollY = window.scrollY || window.pageYOffset;
-        var docHeight = document.documentElement.scrollHeight - window.innerHeight;
-        if (docHeight <= 0) return;
-        var progress = scrollY / docHeight;
-        if (progress >= scrollThreshold) {
-          hasTriggered = true;
-          // TODO: Call Pega Agentic Messaging proactive open:
-          //   PegaMessaging.openProactive({
-          //     intent: 'rideshare-coverage-inquiry',
-          //     message: "Hi Mary! I noticed you're reading about rideshare coverage. Want me to check your current policy and see if there's a gap?"
-          //   });
-          console.log('[U+ Insurance] Proactive Virtual Assistant trigger — scroll threshold reached');
+    /* ---- Proactive scroll-trigger ----
+       Delegated to the shared PCP module. Gated behind the panel checkbox
+       "Auto-fire at 60% scroll" (persisted in localStorage). */
+    if (window.PCPPanel && typeof window.PCPPanel.onRidesharePage === 'function') {
+      window.PCPPanel.onRidesharePage();
+    } else {
+      document.addEventListener('DOMContentLoaded', function () {
+        if (window.PCPPanel && typeof window.PCPPanel.onRidesharePage === 'function') {
+          window.PCPPanel.onRidesharePage();
         }
-      }
-      window.addEventListener('scroll', onScroll, { passive: true });
-    })();
+      });
+    }
   </script>
 
 </body>

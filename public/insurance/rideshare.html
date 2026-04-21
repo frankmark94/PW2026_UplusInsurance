@@ -316,6 +316,129 @@
          Scroll-triggered proactive open logic is stubbed below. */
     }
 
+    /* ---- Recommended-for-you offers drawer (slides from left) ---- */
+    .offers-tray {
+      position: fixed;
+      left: 0;
+      bottom: 24px;
+      z-index: 9000;
+      pointer-events: none; /* children handle clicks */
+      font-family: 'Inter', sans-serif;
+      display: flex;
+      align-items: flex-end;
+    }
+    /* Toggle tab sits on the left edge, vertical text */
+    .offers-tray-toggle-row {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    .offers-tray-toggle {
+      pointer-events: auto;
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 10px 16px;
+      background: var(--brandColor);
+      color: #fff;
+      font-size: 13px; font-weight: 700; letter-spacing: 0.4px;
+      text-transform: uppercase;
+      border: none;
+      border-radius: 0 6px 6px 0;
+      cursor: pointer;
+      box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.15);
+      font-family: 'Inter', sans-serif;
+      transition: background 0.2s, transform 0.3s ease;
+    }
+    .offers-tray-toggle:hover { background: #8B0000; }
+    .offers-tray-toggle .chevron {
+      width: 12px; height: 12px; fill: currentColor;
+      transform: rotate(-90deg); /* arrow points right when closed */
+      transition: transform 0.3s ease;
+    }
+    .offers-tray.is-open .offers-tray-toggle .chevron {
+      transform: rotate(90deg); /* arrow points left when open */
+    }
+    /* Drawer panel slides in from the left */
+    .offers-tray-panel {
+      pointer-events: auto;
+      position: fixed;
+      left: 0;
+      bottom: 60px; /* sit above the MY OFFERS tab */
+      width: min(420px, 90vw);
+      max-height: calc(100vh - 80px);
+      background: #F6F6F9;
+      border: 1px solid #e5e5ea;
+      border-left: none;
+      border-radius: 0 10px 10px 0;
+      box-shadow: 6px 6px 24px rgba(0, 0, 0, 0.18);
+      transform: translateX(-100%);
+      transition: transform 0.35s ease;
+      overflow-y: auto;
+      z-index: 9001;
+      display: flex;
+      flex-direction: column;
+    }
+    .offers-tray.is-open .offers-tray-panel {
+      transform: translateX(0);
+    }
+    /* Close button inside the drawer */
+    .offers-drawer-close {
+      position: absolute;
+      top: 12px; right: 12px;
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      border: none;
+      background: transparent;
+      color: #555;
+      cursor: pointer;
+      font-size: 22px;
+      line-height: 1;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.15s;
+    }
+    .offers-drawer-close:hover { background: rgba(0,0,0,0.06); color: #000; }
+    .offers-tray-inner {
+      padding: 28px 24px 32px;
+    }
+    .offers-tray h2 {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--brandColor);
+      margin-bottom: 4px;
+    }
+    .offers-tray .offers-subtitle {
+      font-size: 14px;
+      color: #6b6b70;
+      margin-bottom: 20px;
+    }
+    .offers-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .offer-tile {
+      background: #fff;
+      border: 1px solid #e5e5ea;
+      border-radius: 8px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.15s, box-shadow 0.15s;
+      display: block;
+    }
+    .offer-tile:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+    }
+    .offer-tile img {
+      display: block;
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+    }
+    @media (max-width: 600px) {
+      .offers-tray-panel { width: 88vw; }
+      .offer-tile img { max-height: 240px; }
+    }
+
     /* ---- Responsive ---- */
     @media (max-width: 900px) {
       .period-grid { grid-template-columns: 1fr; }
@@ -528,46 +651,157 @@
     </div>
   </footer>
 
+  <!-- Recommended-for-you offers tray (collapsible, pinned to bottom-left) -->
+  <section class="offers-tray" id="offers-tray">
+    <div class="offers-tray-toggle-row">
+      <button type="button" class="offers-tray-toggle" id="offers-tray-toggle"
+              aria-controls="offers-tray-panel" aria-expanded="false">
+        <span>My Offers</span>
+        <svg class="chevron" viewBox="0 0 20 20" aria-hidden="true">
+          <path d="M5 8l5 5 5-5z"/>
+        </svg>
+      </button>
+    </div>
+    <div class="offers-tray-panel" id="offers-tray-panel" role="region" aria-label="Recommended offers">
+      <button type="button" class="offers-drawer-close" id="offers-drawer-close" aria-label="Close offers">&times;</button>
+      <div class="offers-tray-inner">
+        <h2>Recommended for You</h2>
+        <p class="offers-subtitle">Based on your policy and driving profile</p>
+        <div class="offers-grid">
+          <a class="offer-tile" href="#" data-offer="save_driver" aria-label="Safe driver discount offer">
+            <img src="./img/offer_save_driver.png" alt="Safe driver discount" />
+          </a>
+          <a class="offer-tile" href="#" data-offer="bundle" aria-label="Auto + home bundle offer">
+            <img src="./img/offer_bundle.png" alt="Auto and home bundle" />
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Pega Agentic Messaging widget mount point (bottom-right corner) -->
   <div id="pega-messaging-widget" class="proactive-widget-anchor">
-    <!-- TODO: Pega Agentic Messaging widget will inject itself here.
-         The widget itself controls its floating button/chat UI positioning. -->
+    <!-- The Pega Web Messaging widget injects its own floating button/chat UI
+         (#pegaChatWidget) — this anchor div is unused but preserved for layout. -->
   </div>
+
+  <!-- Pega Web Messaging widget bootstrap (standalone page, no Vue/SPA).
+       Reads runtime config from localStorage('config_insurance'), falling back
+       to the defaults in config-settings.js. Mirrors src/global.js loader. -->
+  <script src="./js/config-settings.js"></script>
+  <script>
+    (function bootstrapPegaChatWidget() {
+      try {
+        var cfg = (window.settings && window.settings.pega_chat) || {};
+        // Merge user-saved runtime config (set via the SPA Settings page)
+        try {
+          var saved = localStorage.getItem('config_insurance');
+          if (saved) {
+            var parsed = JSON.parse(saved);
+            if (parsed && parsed.settings && parsed.settings.pega_chat) {
+              cfg = Object.assign({}, cfg, parsed.settings.pega_chat);
+            }
+          }
+        } catch (e) { /* ignore malformed config */ }
+
+        if (!cfg.DMMURL || !cfg.DMMID) {
+          console.warn('[U+ Insurance] Pega Web Messaging not loaded on rideshare page: DMMURL/DMMID not configured. Set them on the Settings page of the SPA, then reload.');
+          return;
+        }
+
+        // Scaffolding object — must exist before the widget script evaluates.
+        if (window.PegaUnifiedChatWidget === undefined) {
+          window.PegaUnifiedChatWidget = {};
+        }
+
+        // Minimal session-initialized hook (just fix z-index so the widget
+        // sits above page content). No JWT / private-session path here —
+        // this page is anonymous, matching the rideshare demo flow.
+        window.PegaUnifiedChatWidget.onSessionInitialized = function (sid) {
+          console.log('[U+ Insurance] PegaUnifiedChatWidget onSessionInitialized=' + sid);
+          try { localStorage.setItem('sessionId', sid); } catch (e) {}
+          var w = document.getElementById('pegaChatWidget');
+          if (w) w.style.zIndex = 1000;
+        };
+
+        var s = document.createElement('script');
+        s.setAttribute('id', cfg.DMMID);
+        s.setAttribute('src', cfg.DMMURL);
+        s.onload = function () {
+          setTimeout(function () {
+            var w = document.getElementById('pegaChatWidget');
+            if (w) w.style.zIndex = 1000;
+          }, 3000);
+        };
+        document.head.appendChild(s);
+      } catch (err) {
+        console.error('[U+ Insurance] Failed to bootstrap Pega Web Messaging widget:', err);
+      }
+    })();
+  </script>
+
+  <!-- Proactive Chat presenter panel (backtick-toggle) — shared module -->
+  <script src="./js/proactive-chat-panel.js"></script>
 
   <script>
     /* ---- Final-CTA button click ---- */
     document.getElementById('open-assistant-btn').addEventListener('click', function () {
-      // TODO: Open the Pega Agentic Messaging widget with rideshare context.
-      //   PegaMessaging.open({ intent: 'rideshare-coverage-inquiry' });
       console.log('[U+ Insurance] Chat with Virtual Assistant clicked — rideshare page');
+      // Fire the same proactive trigger as the presenter panel so Mary lands
+      // straight in the rideshare conversation.
+      if (window.PegaUnifiedChatWidget && typeof window.PegaUnifiedChatWidget.triggerChat === 'function') {
+        var code = (localStorage.getItem('pcp.code') || '5sonPage').trim();
+        window.PegaUnifiedChatWidget.triggerChat(code);
+      } else {
+        console.warn('[U+ Insurance] PegaUnifiedChatWidget not available — widget may not be loaded. Check Settings > Chat > DMMURL.');
+      }
     });
 
-    /* ---- Proactive scroll-triggered widget open (stub) ----
-       When the user scrolls past ~60% of the page, we will trigger a proactive
-       Virtual Assistant message offering to help. Actual widget triggering
-       will be wired into the Pega Agentic Messaging API later. */
-    (function () {
-      var hasTriggered = false;
-      var scrollThreshold = 0.6; // 60% of the page
-
-      function onScroll() {
-        if (hasTriggered) return;
-        var scrollY = window.scrollY || window.pageYOffset;
-        var docHeight = document.documentElement.scrollHeight - window.innerHeight;
-        if (docHeight <= 0) return;
-        var progress = scrollY / docHeight;
-        if (progress >= scrollThreshold) {
-          hasTriggered = true;
-          // TODO: Call Pega Agentic Messaging proactive open:
-          //   PegaMessaging.openProactive({
-          //     intent: 'rideshare-coverage-inquiry',
-          //     message: "Hi Mary! I noticed you're reading about rideshare coverage. Want me to check your current policy and see if there's a gap?"
-          //   });
-          console.log('[U+ Insurance] Proactive Virtual Assistant trigger — scroll threshold reached');
+    /* ---- Proactive scroll-trigger ----
+       Delegated to the shared PCP module. Gated behind the panel checkbox
+       "Auto-fire at 60% scroll" (persisted in localStorage). */
+    if (window.PCPPanel && typeof window.PCPPanel.onRidesharePage === 'function') {
+      window.PCPPanel.onRidesharePage();
+    } else {
+      document.addEventListener('DOMContentLoaded', function () {
+        if (window.PCPPanel && typeof window.PCPPanel.onRidesharePage === 'function') {
+          window.PCPPanel.onRidesharePage();
         }
+      });
+    }
+
+    /* ---- Offers tray (collapsible "My Offers" tab) ---- */
+    document.addEventListener('click', function (e) {
+      var toggle = e.target.closest && e.target.closest('#offers-tray-toggle');
+      if (toggle) {
+        e.preventDefault();
+        var tray = document.getElementById('offers-tray');
+        if (!tray) return;
+        var open = tray.classList.toggle('is-open');
+        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+        console.log('[U+ Insurance] Offers tray toggled:', open ? 'open' : 'closed');
+        return;
       }
-      window.addEventListener('scroll', onScroll, { passive: true });
-    })();
+      // Close button inside the drawer
+      if (e.target.closest && e.target.closest('#offers-drawer-close')) {
+        e.preventDefault();
+        var t = document.getElementById('offers-tray');
+        if (t) t.classList.remove('is-open');
+        return;
+      }
+      var tile = e.target.closest && e.target.closest('.offer-tile');
+      if (tile) {
+        e.preventDefault();
+        console.log('[U+ Insurance] Offer tile clicked:', tile.dataset.offer);
+      }
+    });
+    // Esc closes the drawer
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') {
+        var t = document.getElementById('offers-tray');
+        if (t && t.classList.contains('is-open')) t.classList.remove('is-open');
+      }
+    });
   </script>
 
 </body>
