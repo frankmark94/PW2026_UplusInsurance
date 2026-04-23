@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="theme-color" content="#CA0000" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <link rel="icon" href="../favicon.ico" />
+
+  <!-- Cursive font for the typed-signature preview. Single <link>, no npm change. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&display=swap" />
+
+  <title>U+ Insurance — Sign Rideshare Addendum</title>
+  <style>
+    @font-face {
+      font-family: 'Inter';
+      font-style: normal;
+      font-weight: 300 700;
+      font-display: swap;
+      src: url('/fonts/Inter-Normal.woff2') format('woff2');
+      unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
+        U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193,
+        U+2212, U+2215, U+FEFF, U+FFFD;
+    }
+
+    :root {
+      --brandColor: #CA0000;
+      --brandDeep: #8B0000;
+      --brandTint: #fde0e0;
+      --brandTintSoft: #fdf0f0;
+      --textColor: #050505;
+      --textMuted: #555;
+      --borderColor: #e3e3e3;
+      --successColor: #1f9d55;
+      --surface: #fff;
+      --pageBg: #f7f7f7;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font: 16px/1.4 'Inter', sans-serif;
+      color: var(--textColor);
+      background: var(--pageBg);
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    a, a:visited { text-decoration: none; color: var(--brandColor); }
+    a:hover { text-decoration: underline; }
+
+    /* ---- Header ---- */
+    header { background: var(--surface); padding: 0 16px; width: 100%; border-bottom: 1px solid var(--borderColor); }
+    .header {
+      display: flex; align-items: center;
+      max-width: 1400px; margin: 0 auto; height: 72px;
+    }
+    .logo { height: 36px; cursor: pointer; }
+    .header nav { flex: 1; }
+    .header nav ul { display: flex; justify-content: flex-end; list-style: none; }
+    .header nav ul li { margin-right: 28px; }
+    .header nav a, .header nav a:visited { font-weight: 400; font-size: 15px; color: var(--textColor); }
+
+    /* ---- Main ---- */
+    main { flex: 1; display: flex; flex-direction: column; }
+    .sign-wrap {
+      width: 100%; max-width: 760px;
+      margin: 0 auto; padding: 24px 16px 48px;
+      display: flex; flex-direction: column; gap: 16px;
+    }
+
+    /* ---- Card shell ---- */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--borderColor);
+      border-radius: 10px;
+      padding: 20px 22px;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+    }
+
+    /* ---- Document banner ---- */
+    .doc-banner {
+      display: flex; align-items: flex-start; gap: 14px;
+      background: var(--brandTintSoft);
+      border-left: 4px solid var(--brandColor);
+      border-radius: 8px;
+      padding: 16px 18px;
+    }
+    .doc-banner .doc-banner-icon {
+      flex: none;
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      background: var(--brandColor);
+      color: #fff;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .doc-banner .doc-banner-icon svg { width: 18px; height: 18px; fill: currentColor; }
+    .doc-banner h1 {
+      font-size: 17px; font-weight: 700;
+      color: var(--brandColor);
+      margin-bottom: 4px; line-height: 1.25;
+    }
+    .doc-banner p {
+      font-size: 13px; color: var(--textMuted);
+      line-height: 1.45;
+    }
+    .doc-banner p strong { color: var(--textColor); font-weight: 600; }
+
+    /* ---- Policy summary card ---- */
+    .summary-card h2 {
+      font-size: 18px; font-weight: 700;
+      margin-bottom: 14px;
+    }
+    .summary-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px 24px;
+    }
+    .summary-grid .cell .label {
+      font-size: 11px; font-weight: 600;
+      color: var(--textMuted);
+      text-transform: uppercase; letter-spacing: 0.4px;
+      margin-bottom: 2px;
+    }
+    .summary-grid .cell .value {
+      font-size: 15px; font-weight: 600;
+      color: var(--textColor);
+    }
+    .summary-grid .cell .value.accent { color: var(--brandColor); }
+    .summary-grid .cell .value .delta {
+      font-size: 12px; font-weight: 500; color: var(--textMuted);
+      margin-left: 2px;
+    }
+
+    /* ---- Key terms card ---- */
+    .terms-card h2 {
+      font-size: 18px; font-weight: 700;
+      margin-bottom: 6px;
+    }
+    .terms-card .terms-intro {
+      font-size: 13px; color: var(--textMuted);
+      margin-bottom: 12px;
+    }
+    .terms-scroll {
+      max-height: 260px; overflow-y: auto;
+      border: 1px solid var(--borderColor);
+      border-radius: 8px;
+      background: #fafafa;
+      padding: 14px 16px;
+    }
+    .term-item {
+      display: flex; gap: 12px; padding: 10px 0;
+      border-bottom: 1px dashed var(--borderColor);
+    }
+    .term-item:last-child { border-bottom: none; }
+    .term-item .term-pill {
+      flex: none;
+      min-width: 58px; height: 22px;
+      border-radius: 999px;
+      display: inline-flex; align-items: center; justify-content: center;
+      font-size: 11px; font-weight: 700;
+      letter-spacing: 0.3px;
+      padding: 0 10px;
+      background: var(--brandColor); color: #fff;
+    }
+    .term-item .term-body {
+      flex: 1;
+      font-size: 14px; line-height: 1.45;
+    }
+    .term-item .term-body strong { color: var(--textColor); font-weight: 600; display: block; margin-bottom: 2px; }
+    .term-item .term-body span { color: var(--textMuted); }
+
+    .terms-footer {
+      margin-top: 12px;
+      display: flex; justify-content: flex-end;
+    }
+    .pdf-link {
+      font-size: 13px; font-weight: 600;
+      color: var(--brandColor);
+      display: inline-flex; align-items: center; gap: 6px;
+    }
+    .pdf-link svg { width: 14px; height: 14px; fill: currentColor; }
+
+    /* ---- Signature card ---- */
+    .sig-card { position: relative; overflow: visible; }
+    .sig-card h2 {
+      font-size: 18px; font-weight: 700;
+      margin-bottom: 6px;
+    }
+    .sig-card .sig-intro {
+      font-size: 13px; color: var(--textMuted);
+      margin-bottom: 16px;
+    }
+
+    /* "SIGN HERE" indicator badge */
+    .sign-here-tag {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--brandColor); color: #fff;
+      font-size: 11px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.6px;
+      padding: 5px 10px 5px 12px;
+      border-radius: 3px;
+      margin-bottom: 10px;
+      position: relative;
+    }
+    .sign-here-tag::after {
+      content: '';
+      position: absolute;
+      left: 16px; bottom: -6px;
+      width: 0; height: 0;
+      border-left: 6px solid transparent;
+      border-right: 6px solid transparent;
+      border-top: 6px solid var(--brandColor);
+    }
+    .sign-here-tag svg { width: 12px; height: 12px; fill: currentColor; }
+
+    /* Tabs */
+    .sig-tabs {
+      display: flex; gap: 0;
+      background: #eef0f3;
+      border-radius: 8px;
+      padding: 4px;
+      margin-bottom: 14px;
+    }
+    .sig-tab {
+      flex: 1;
+      border: none; background: transparent;
+      padding: 10px 12px;
+      font: inherit; font-size: 14px; font-weight: 600;
+      color: var(--textMuted);
+      border-radius: 6px;
+      cursor: pointer;
+      display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+      transition: background 0.15s, color 0.15s, box-shadow 0.15s;
+    }
+    .sig-tab svg { width: 14px; height: 14px; fill: currentColor; }
+    .sig-tab[aria-selected="true"] {
+      background: var(--surface); color: var(--textColor);
+      box-shadow: 0 1px 2px rgba(0,0,0,0.08);
+    }
+    .sig-tab:focus-visible { outline: 2px solid var(--brandColor); outline-offset: 2px; }
+
+    /* Tab panels */
+    .sig-panel { display: none; }
+    .sig-panel.is-active { display: block; }
+
+    /* Draw panel */
+    .sig-canvas-wrap {
+      position: relative;
+      border: 2px dashed var(--borderColor);
+      border-radius: 8px;
+      background: #fff;
+      height: 170px;
+      overflow: hidden;
+    }
+    .sig-canvas-wrap.has-signature { border-style: solid; border-color: var(--brandColor); }
+    #sig-canvas {
+      display: block;
+      width: 100%; height: 100%;
+      touch-action: none;
+      cursor: crosshair;
+    }
+    .sig-baseline {
+      position: absolute;
+      left: 20px; right: 20px; bottom: 34px;
+      border-top: 1px dashed #c8c8c8;
+      pointer-events: none;
+    }
+    .sig-placeholder {
+      position: absolute;
+      left: 24px; bottom: 12px;
+      font-size: 12px; color: #b5b5b5;
+      pointer-events: none;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+    .sig-canvas-wrap.has-signature .sig-baseline,
+    .sig-canvas-wrap.has-signature .sig-placeholder { display: none; }
+
+    .sig-actions {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-top: 8px;
+      font-size: 12px; color: var(--textMuted);
+    }
+    .sig-clear {
+      border: none; background: transparent;
+      font: inherit; font-size: 13px; font-weight: 600;
+      color: var(--brandColor);
+      cursor: pointer;
+      padding: 4px 2px;
+      display: inline-flex; align-items: center; gap: 4px;
+    }
+    .sig-clear:hover { text-decoration: underline; }
+    .sig-clear svg { width: 12px; height: 12px; fill: currentColor; }
+    .sig-clear:disabled { color: #bbb; cursor: default; }
+    .sig-clear:disabled:hover { text-decoration: none; }
+
+    /* Type panel */
+    .sig-type-wrap { display: flex; flex-direction: column; gap: 12px; }
+    .sig-type-label {
+      font-size: 12px; font-weight: 600;
+      color: var(--textMuted);
+      text-transform: uppercase; letter-spacing: 0.4px;
+    }
+    .sig-name-input {
+      font: inherit; font-size: 16px;
+      padding: 12px 14px;
+      border: 1px solid var(--borderColor);
+      border-radius: 8px;
+      background: #fff;
+      color: var(--textColor);
+      width: 100%;
+    }
+    .sig-name-input:focus {
+      outline: none;
+      border-color: var(--brandColor);
+      box-shadow: 0 0 0 3px rgba(202, 0, 0, 0.12);
+    }
+    .sig-preview {
+      position: relative;
+      border: 2px dashed var(--borderColor);
+      border-radius: 8px;
+      background: #fff;
+      padding: 18px 22px;
+      min-height: 108px;
+      display: flex; align-items: center; justify-content: center;
+      transition: border-color 0.15s;
+    }
+    .sig-preview.has-signature { border-style: solid; border-color: var(--brandColor); }
+    .sig-preview-text {
+      font-family: 'Caveat', 'Brush Script MT', cursive;
+      font-weight: 500;
+      font-size: 48px;
+      line-height: 1;
+      color: #1a1a1a;
+      word-break: break-word;
+      text-align: center;
+    }
+    .sig-preview-text:empty::after {
+      content: 'Your signature will appear here';
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      color: #b5b5b5;
+      font-weight: 400;
+    }
+
+    /* Agreement + CTA */
+    .sig-agree {
+      display: flex; align-items: flex-start; gap: 12px;
+      margin-top: 18px;
+      padding: 12px 14px;
+      background: #fafafa;
+      border: 1px solid var(--borderColor);
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    .sig-agree input[type="checkbox"] {
+      flex: none;
+      width: 20px; height: 20px;
+      accent-color: var(--brandColor);
+      margin-top: 1px;
+      cursor: pointer;
+    }
+    .sig-agree .agree-label {
+      font-size: 13px; line-height: 1.45; color: var(--textColor);
+    }
+    .sig-agree .agree-label strong { font-weight: 600; }
+
+    .sig-submit-row {
+      display: flex; justify-content: flex-end;
+      margin-top: 16px;
+    }
+    .btn-primary {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      font: inherit; font-size: 15px; font-weight: 700;
+      padding: 13px 26px;
+      min-height: 48px;
+      border: none; border-radius: 8px;
+      background: var(--brandColor); color: #fff;
+      cursor: pointer;
+      transition: background 0.15s, transform 0.15s, box-shadow 0.15s, opacity 0.15s;
+    }
+    a.btn-primary, a.btn-primary:visited { color: #fff; text-decoration: none; }
+    .btn-primary:hover:not(:disabled) { background: var(--brandDeep); transform: translateY(-1px); }
+    a.btn-primary:hover { text-decoration: none; }
+    .btn-primary:active:not(:disabled) { transform: translateY(0); }
+    .btn-primary:disabled { background: #d1d5db; color: #fff; cursor: not-allowed; opacity: 0.85; }
+    .btn-primary svg { width: 16px; height: 16px; fill: currentColor; }
+
+    /* ---- Pre/post-sign transition ---- */
+    .pre-sign, .post-sign {
+      transition: opacity 0.35s ease, transform 0.35s ease;
+    }
+    .post-sign { display: none; opacity: 0; transform: translateY(8px); }
+    .sign-wrap.is-signed .pre-sign {
+      opacity: 0; transform: translateY(-8px);
+      pointer-events: none;
+    }
+    .sign-wrap.is-signed .post-sign {
+      display: block; opacity: 1; transform: translateY(0);
+    }
+
+    /* ---- Success card ---- */
+    .success-card {
+      text-align: center;
+      padding: 36px 28px;
+      border: 1px solid var(--borderColor);
+      border-radius: 12px;
+      background: #fff;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+    }
+    .success-check {
+      width: 72px; height: 72px;
+      margin: 0 auto 20px;
+      border-radius: 50%;
+      background: #e7f6ee;
+      color: var(--successColor);
+      display: flex; align-items: center; justify-content: center;
+      animation: successPop 0.5s ease-out;
+    }
+    .success-check svg { width: 38px; height: 38px; fill: currentColor; }
+    @keyframes successPop {
+      0% { transform: scale(0.6); opacity: 0; }
+      60% { transform: scale(1.1); opacity: 1; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    .success-card h2 {
+      font-size: 24px; font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .success-card .success-sub {
+      font-size: 15px; color: var(--textMuted);
+      line-height: 1.5;
+      margin-bottom: 22px;
+    }
+    .success-meta {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px 18px;
+      margin: 0 auto 22px;
+      max-width: 440px;
+      text-align: left;
+      padding: 16px 20px;
+      background: #fafafa;
+      border: 1px solid var(--borderColor);
+      border-radius: 8px;
+    }
+    .success-meta .label {
+      font-size: 11px; font-weight: 600;
+      color: var(--textMuted);
+      text-transform: uppercase; letter-spacing: 0.4px;
+      margin-bottom: 2px;
+    }
+    .success-meta .value {
+      font-size: 14px; font-weight: 600;
+      color: var(--textColor);
+      word-break: break-word;
+    }
+    .success-email {
+      font-size: 13px; color: var(--textMuted);
+      margin-bottom: 22px;
+    }
+    .success-email strong { color: var(--textColor); font-weight: 600; }
+    .success-cta-row { display: flex; justify-content: center; }
+
+    /* ---- Footer ---- */
+    footer { background: var(--surface); width: 100%; padding: 0 16px; border-top: 1px solid var(--borderColor); }
+    footer .footer-inner {
+      max-width: 1400px; margin: 0 auto;
+      display: flex; align-items: center; flex-wrap: wrap; gap: 16px;
+      padding: 20px 0;
+    }
+    footer nav a { margin-right: 28px; font-size: 14px; color: var(--textColor); }
+    footer .copyright { margin-left: auto; font-size: 13px; color: var(--textMuted); }
+
+    /* ---- Responsive ---- */
+    @media (max-width: 600px) {
+      .header { height: 60px; }
+      .header nav ul { display: none; }
+      .logo { height: 32px; }
+      .sign-wrap { padding: 16px 12px 32px; gap: 12px; }
+      .card { padding: 16px; border-radius: 8px; }
+      .doc-banner { padding: 14px; gap: 12px; }
+      .doc-banner .doc-banner-icon { width: 32px; height: 32px; }
+      .doc-banner h1 { font-size: 16px; }
+      .summary-grid { grid-template-columns: 1fr; gap: 12px; }
+      .summary-card h2, .terms-card h2 { font-size: 17px; }
+      .terms-scroll { max-height: 220px; padding: 12px 14px; }
+      .term-item { gap: 10px; padding: 9px 0; }
+      .term-item .term-pill { min-width: 54px; font-size: 10px; }
+      .success-card { padding: 28px 18px; }
+      .success-card h2 { font-size: 20px; }
+      .success-card .success-sub { font-size: 14px; }
+      .success-meta { grid-template-columns: 1fr; gap: 10px; padding: 14px 16px; }
+      .success-check { width: 60px; height: 60px; }
+      .success-check svg { width: 32px; height: 32px; }
+      .sig-preview-text { font-size: 40px; }
+      .sig-submit-row .btn-primary { width: 100%; }
+      .sig-submit-row { justify-content: stretch; }
+      footer .footer-inner { padding: 14px 0; }
+      footer nav { display: none; }
+      footer .copyright { margin: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="header">
+      <a href="./index.html">
+        <img class="logo" src="./img/u+-logo.svg" alt="U+" />
+      </a>
+      <nav>
+        <ul>
+          <li><a href="./index.html">About Us</a></li>
+          <li><a href="./index.html">Life</a></li>
+          <li><a href="./index.html">Home &amp; Auto</a></li>
+          <li><a href="./index.html">Travel</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main -->
+  <main>
+    <div class="sign-wrap" id="sign-wrap">
+
+      <div class="pre-sign">
+
+      <!-- Document banner -->
+      <section class="doc-banner" aria-label="Document status">
+        <span class="doc-banner-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+        </span>
+        <div>
+          <h1>Rideshare Coverage Addendum &mdash; Ready for your signature</h1>
+          <p>
+            Document generated <span id="doc-generated-at">&hellip;</span> &nbsp;|&nbsp;
+            Confirmation <strong>#RSA-2026-4481927</strong>
+          </p>
+        </div>
+      </section>
+
+      <!-- Policy summary -->
+      <section class="card summary-card" aria-label="Policy summary">
+        <h2>Policy Summary</h2>
+        <div class="summary-grid">
+          <div class="cell">
+            <div class="label">Policyholder</div>
+            <div class="value">Mary Taylor</div>
+          </div>
+          <div class="cell">
+            <div class="label">New Monthly Premium</div>
+            <div class="value accent">$165.50 <span class="delta">(+$18.00)</span></div>
+          </div>
+          <div class="cell">
+            <div class="label">Policy Number</div>
+            <div class="value">UPI-2026-4481927</div>
+          </div>
+          <div class="cell">
+            <div class="label">Effective Date</div>
+            <div class="value">April 21, 2026</div>
+          </div>
+          <div class="cell">
+            <div class="label">Vehicle</div>
+            <div class="value">2025 Toyota RAV4 LE</div>
+          </div>
+          <div class="cell">
+            <div class="label">Endorsement</div>
+            <div class="value">Rideshare Coverage (E-441R)</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Key terms -->
+      <section class="card terms-card" aria-label="Key addendum terms">
+        <h2>What you're signing</h2>
+        <p class="terms-intro">
+          This addendum extends your U+ Insurance personal auto policy to cover
+          driving activity on approved rideshare platforms (Uber, Lyft). Please review
+          the key terms below before signing.
+        </p>
+        <div class="terms-scroll" tabindex="0">
+
+          <div class="term-item">
+            <span class="term-pill">Period 1</span>
+            <div class="term-body">
+              <strong>App on, awaiting a match</strong>
+              <span>Your personal policy is extended to include liability and collision
+              coverage while the rideshare app is on and you are waiting to be matched
+              with a rider.</span>
+            </div>
+          </div>
+
+          <div class="term-item">
+            <span class="term-pill">Period 2</span>
+            <div class="term-body">
+              <strong>Matched to a rider, en route to pickup</strong>
+              <span>Full personal-policy coverage, including liability, collision,
+              comprehensive, and uninsured motorist, remains in effect from match
+              confirmation through passenger pickup.</span>
+            </div>
+          </div>
+
+          <div class="term-item">
+            <span class="term-pill">Period 3</span>
+            <div class="term-body">
+              <strong>Passenger in the vehicle</strong>
+              <span>Full personal-policy coverage applies for the duration of the trip.
+              The rideshare platform&rsquo;s commercial policy provides primary coverage;
+              your U+ endorsement fills any gaps up to your personal-policy limits.</span>
+            </div>
+          </div>
+
+          <div class="term-item">
+            <span class="term-pill">Premium</span>
+            <div class="term-body">
+              <strong>Monthly premium adjustment: +$18.00</strong>
+              <span>Effective on your next billing cycle (May 21, 2026). Your current
+              discounts, deductibles, and policy limits remain unchanged.</span>
+            </div>
+          </div>
+
+          <div class="term-item">
+            <span class="term-pill">Effective</span>
+            <div class="term-body">
+              <strong>Coverage begins April 21, 2026 at 12:00&nbsp;AM&nbsp;ET</strong>
+              <span>This addendum remains in effect for the duration of your personal
+              auto policy and renews automatically with each policy term unless
+              cancelled in writing with 30 days&rsquo; notice.</span>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="terms-footer">
+          <a class="pdf-link" href="#" id="pdf-link"
+             data-pdf="./img/rideshare-addendum.pdf"
+             aria-label="View the full rideshare addendum PDF">
+            View full policy PDF
+            <svg viewBox="0 0 24 24"><path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/></svg>
+          </a>
+        </div>
+      </section>
+
+      <!-- Signature block -->
+      <section class="card sig-card" aria-label="Sign the addendum">
+        <span class="sign-here-tag" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+          Sign Here
+        </span>
+
+        <h2>Your signature</h2>
+        <p class="sig-intro">
+          Choose how you&rsquo;d like to sign. Your electronic signature carries the same
+          legal weight as a handwritten one.
+        </p>
+
+        <div class="sig-tabs" role="tablist" aria-label="Signature method">
+          <button type="button" class="sig-tab" role="tab" id="tab-draw"
+                  aria-selected="true" aria-controls="panel-draw" data-panel="draw">
+            <svg viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+            Draw
+          </button>
+          <button type="button" class="sig-tab" role="tab" id="tab-type"
+                  aria-selected="false" aria-controls="panel-type" data-panel="type">
+            <svg viewBox="0 0 24 24"><path d="M5 4v3h5.5v12h3V7H19V4z"/></svg>
+            Type
+          </button>
+        </div>
+
+        <!-- Draw panel -->
+        <div class="sig-panel is-active" id="panel-draw"
+             role="tabpanel" aria-labelledby="tab-draw">
+          <div class="sig-canvas-wrap" id="sig-canvas-wrap">
+            <canvas id="sig-canvas" aria-label="Draw your signature with mouse or finger"></canvas>
+            <div class="sig-baseline" aria-hidden="true"></div>
+            <div class="sig-placeholder">&times; &nbsp;Sign above the line</div>
+          </div>
+          <div class="sig-actions">
+            <span id="sig-draw-hint">Use your mouse or finger to sign above</span>
+            <button type="button" class="sig-clear" id="sig-clear" disabled>
+              <svg viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+              Clear
+            </button>
+          </div>
+        </div>
+
+        <!-- Type panel -->
+        <div class="sig-panel" id="panel-type"
+             role="tabpanel" aria-labelledby="tab-type" hidden>
+          <div class="sig-type-wrap">
+            <label class="sig-type-label" for="sig-name">Type your full legal name</label>
+            <input type="text" class="sig-name-input" id="sig-name"
+                   value="Mary Taylor" maxlength="60"
+                   autocomplete="off" spellcheck="false" />
+            <div class="sig-preview" id="sig-preview" aria-live="polite">
+              <span class="sig-preview-text" id="sig-preview-text">Mary Taylor</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Agreement + submit -->
+        <label class="sig-agree" for="sig-agree">
+          <input type="checkbox" id="sig-agree" />
+          <span class="agree-label">
+            I have read and agree to the <strong>Rideshare Coverage Addendum</strong>
+            terms above. I understand this is a legally binding electronic signature
+            and I authorize U+ Insurance to apply this endorsement to my policy.
+          </span>
+        </label>
+
+        <div class="sig-submit-row">
+          <button type="button" class="btn-primary" id="sig-submit" disabled>
+            <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+            Agree &amp; Sign
+          </button>
+        </div>
+      </section>
+
+      </div><!-- /.pre-sign -->
+
+      <!-- Success state (revealed after signing) -->
+      <div class="post-sign" aria-live="polite">
+        <section class="success-card" role="status">
+          <div class="success-check" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+          </div>
+          <h2>Signature received</h2>
+          <p class="success-sub">
+            Thank you, Mary &mdash; your rideshare coverage addendum is now active on
+            policy <strong>UPI-2026-4481927</strong>.
+          </p>
+
+          <div class="success-meta">
+            <div>
+              <div class="label">Signed</div>
+              <div class="value" id="signed-at">&mdash;</div>
+            </div>
+            <div>
+              <div class="label">Confirmation</div>
+              <div class="value">RSA-2026-4481927</div>
+            </div>
+            <div>
+              <div class="label">Method</div>
+              <div class="value" id="signed-method">&mdash;</div>
+            </div>
+            <div>
+              <div class="label">Coverage Effective</div>
+              <div class="value">April 21, 2026</div>
+            </div>
+          </div>
+
+          <p class="success-email">
+            A copy of this signed addendum has been sent to
+            <strong>mary.johnson1812@gmail.com</strong>.
+          </p>
+
+          <div class="success-cta-row">
+            <a href="./index.html" class="btn-primary" id="return-home">
+              Return to portal
+              <svg viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>
+            </a>
+          </div>
+        </section>
+      </div>
+
+    </div>
+
+    <script>
+      // Stamp the generation timestamp on the banner so the demo always feels live.
+      (function stampGeneratedAt() {
+        var el = document.getElementById('doc-generated-at');
+        if (!el) return;
+        var d = new Date();
+        var opts = { month: 'long', day: 'numeric', year: 'numeric' };
+        var time = d.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
+        el.textContent = d.toLocaleDateString(undefined, opts) + ' ' + time;
+      })();
+
+      // Ghost PDF link: if the addendum PDF has been dropped into public/insurance/img/,
+      // the link resolves; otherwise we suppress navigation so the demo doesn't 404.
+      document.getElementById('pdf-link').addEventListener('click', function (e) {
+        e.preventDefault();
+        var href = this.getAttribute('data-pdf');
+        // TODO: once rideshare-addendum.pdf ships, open it in a new tab.
+        fetch(href, { method: 'HEAD' }).then(function (r) {
+          if (r.ok) window.open(href, '_blank', 'noopener');
+          else console.info('[demo] policy PDF not yet bundled at', href);
+        }).catch(function () {
+          console.info('[demo] policy PDF not yet bundled at', href);
+        });
+      });
+
+      // ---- Signature logic ----
+      (function signatureModule() {
+        var state = { mode: 'draw', hasStrokes: false, typedName: '' };
+
+        // Element refs
+        var tabs       = document.querySelectorAll('.sig-tab');
+        var panels     = { draw: document.getElementById('panel-draw'),
+                           type: document.getElementById('panel-type') };
+        var canvas     = document.getElementById('sig-canvas');
+        var canvasWrap = document.getElementById('sig-canvas-wrap');
+        var clearBtn   = document.getElementById('sig-clear');
+        var nameInput  = document.getElementById('sig-name');
+        var preview    = document.getElementById('sig-preview');
+        var previewTxt = document.getElementById('sig-preview-text');
+        var agreeBox   = document.getElementById('sig-agree');
+        var submitBtn  = document.getElementById('sig-submit');
+
+        var ctx = canvas.getContext('2d');
+
+        // HiDPI-aware canvas sizing. Called on init + resize.
+        function sizeCanvas() {
+          var rect = canvas.getBoundingClientRect();
+          var dpr  = window.devicePixelRatio || 1;
+          // Preserve existing strokes by snapshotting first.
+          var snap = null;
+          if (state.hasStrokes && canvas.width > 0 && canvas.height > 0) {
+            snap = document.createElement('canvas');
+            snap.width = canvas.width; snap.height = canvas.height;
+            snap.getContext('2d').drawImage(canvas, 0, 0);
+          }
+          canvas.width  = Math.max(1, Math.floor(rect.width * dpr));
+          canvas.height = Math.max(1, Math.floor(rect.height * dpr));
+          ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+          ctx.lineCap = 'round';
+          ctx.lineJoin = 'round';
+          ctx.lineWidth = 2.5;
+          ctx.strokeStyle = '#1a1a1a';
+          if (snap) ctx.drawImage(snap, 0, 0, canvas.width / dpr, canvas.height / dpr);
+        }
+
+        function pointerPos(e) {
+          var rect = canvas.getBoundingClientRect();
+          var x, y;
+          if (e.touches && e.touches[0]) {
+            x = e.touches[0].clientX - rect.left;
+            y = e.touches[0].clientY - rect.top;
+          } else {
+            x = e.clientX - rect.left;
+            y = e.clientY - rect.top;
+          }
+          return { x: x, y: y };
+        }
+
+        var drawing = false;
+        function beginStroke(e) {
+          drawing = true;
+          var p = pointerPos(e);
+          ctx.beginPath();
+          ctx.moveTo(p.x, p.y);
+          if (e.cancelable) e.preventDefault();
+        }
+        function extendStroke(e) {
+          if (!drawing) return;
+          var p = pointerPos(e);
+          ctx.lineTo(p.x, p.y);
+          ctx.stroke();
+          if (!state.hasStrokes) {
+            state.hasStrokes = true;
+            canvasWrap.classList.add('has-signature');
+            clearBtn.disabled = false;
+            updateSubmitState();
+          }
+          if (e.cancelable) e.preventDefault();
+        }
+        function endStroke() {
+          if (!drawing) return;
+          drawing = false;
+          ctx.closePath();
+        }
+
+        canvas.addEventListener('mousedown', beginStroke);
+        canvas.addEventListener('mousemove', extendStroke);
+        window.addEventListener('mouseup', endStroke);
+        canvas.addEventListener('mouseleave', endStroke);
+        canvas.addEventListener('touchstart', beginStroke, { passive: false });
+        canvas.addEventListener('touchmove',  extendStroke, { passive: false });
+        canvas.addEventListener('touchend',   endStroke);
+        canvas.addEventListener('touchcancel', endStroke);
+
+        clearBtn.addEventListener('click', function () {
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          state.hasStrokes = false;
+          canvasWrap.classList.remove('has-signature');
+          clearBtn.disabled = true;
+          updateSubmitState();
+        });
+
+        // Tab switching
+        tabs.forEach(function (tab) {
+          tab.addEventListener('click', function () {
+            var mode = tab.getAttribute('data-panel');
+            state.mode = mode;
+            tabs.forEach(function (t) { t.setAttribute('aria-selected', t === tab ? 'true' : 'false'); });
+            Object.keys(panels).forEach(function (key) {
+              var p = panels[key];
+              if (key === mode) { p.classList.add('is-active'); p.removeAttribute('hidden'); }
+              else { p.classList.remove('is-active'); p.setAttribute('hidden', ''); }
+            });
+            if (mode === 'draw') {
+              // Canvas needs a re-measure after being revealed from display:none.
+              sizeCanvas();
+            }
+            updateSubmitState();
+          });
+        });
+
+        // Typed signature preview
+        function refreshTypedPreview() {
+          state.typedName = (nameInput.value || '').trim();
+          previewTxt.textContent = state.typedName;
+          preview.classList.toggle('has-signature', state.typedName.length > 0);
+          updateSubmitState();
+        }
+        nameInput.addEventListener('input', refreshTypedPreview);
+
+        // Agreement + submit gating
+        function hasSignature() {
+          if (state.mode === 'draw') return state.hasStrokes;
+          return state.typedName.length >= 2;
+        }
+        function updateSubmitState() {
+          submitBtn.disabled = !(hasSignature() && agreeBox.checked);
+        }
+        agreeBox.addEventListener('change', updateSubmitState);
+
+        // Resize handler — debounce light
+        var resizeTimer;
+        window.addEventListener('resize', function () {
+          clearTimeout(resizeTimer);
+          resizeTimer = setTimeout(sizeCanvas, 120);
+        });
+
+        // Init
+        sizeCanvas();
+        refreshTypedPreview();
+        updateSubmitState();
+
+        // Expose payload builder for submit handler.
+        window.__sigModule = {
+          state: state,
+          getPayload: function () {
+            return {
+              method: state.mode,
+              dataUrl: state.mode === 'draw' ? canvas.toDataURL('image/png') : null,
+              typedName: state.mode === 'type' ? state.typedName : null,
+              signedAt: new Date().toISOString()
+            };
+          }
+        };
+      })();
+
+      // ---- Submit handler ----
+      (function submitModule() {
+        var submitBtn  = document.getElementById('sig-submit');
+        var signWrap   = document.getElementById('sign-wrap');
+        var signedAt   = document.getElementById('signed-at');
+        var signedMeth = document.getElementById('signed-method');
+
+        submitBtn.addEventListener('click', function () {
+          if (submitBtn.disabled) return;
+          var payload = window.__sigModule.getPayload();
+          console.info('[demo] signed', payload);
+          // TODO: wire Pega payload handoff here (postMessage to parent SDK emulator, etc.)
+
+          // Stamp the signed timestamp + method on the success card.
+          var d = new Date(payload.signedAt);
+          var dateStr = d.toLocaleDateString(undefined,
+            { month: 'short', day: 'numeric', year: 'numeric' });
+          var timeStr = d.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
+          signedAt.textContent = dateStr + ' · ' + timeStr;
+          signedMeth.textContent = payload.method === 'draw' ? 'Drawn signature' : 'Typed signature';
+
+          // Transition: fade pre-sign out, fade success in, scroll to top of card.
+          signWrap.classList.add('is-signed');
+          setTimeout(function () {
+            var post = document.querySelector('.post-sign');
+            if (post && post.scrollIntoView) {
+              post.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+          }, 100);
+        });
+      })();
+    </script>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-inner">
+      <nav>
+        <a href="./index.html">About us</a>
+        <a href="./index.html">Reviews</a>
+        <a href="./index.html">Privacy</a>
+      </nav>
+      <p class="copyright">&copy; 2026 Pegasystems</p>
+    </div>
+  </footer>
+
+</body>
+</html>
